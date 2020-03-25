@@ -1,0 +1,293 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="Admin_AdminMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="icon" href="../Images/pos-icon.gif" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.3.1.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <style type="text/css">
+        /*sidebar*/
+        .row{
+            margin-left:0;
+            margin-right:0;
+        }
+        #wrapper{
+            padding-left:70px;
+            transition: all .4s ease 0s;
+            height:100%;
+        }
+        #sidebar-wrapper{
+            margin-left:-1px;
+            margin-top:50px;
+            left:1px;
+            width:225px;
+            background:#222;
+            position:fixed;
+            height:100%;
+            z-index:1000;
+            transition:all .4s ease 0s;
+        }
+        .sidebar-nav{
+            display:block;
+            float:left;
+            width:150px;
+            list-style:none;
+            margin:0;
+            padding:0;
+        }
+        #page-content-wrapper{
+            padding-left:0;
+            margin-left:0px;
+            width:100%;
+            height:auto;
+        }
+        #wrapper.active{
+            padding-left:150px;
+        }
+        #wrapper.active #sidebar-wrapper{
+            left:150px;
+        }
+        #sidebar-menu li a, .sidebar-nav li a{
+            color:#999;
+            display:block;
+            float:left;
+            text-decoration:none;
+            width:220px;
+            background:#252525;
+            border-top:1px solid #1a1a1a;
+            -webkit-transition: background .5s;
+            -moz-transition: background .5s;
+            -o-transition: background .5s;
+            -ms-transition: background .5s;
+            transition: background .5s;
+        }
+        .sidebar_name{
+            padding-top:25px;
+            color:#fff;
+            opacity:.7;
+        }
+        .sidebar-nav li{
+            line-height:40px;
+            text-indent:20px;
+        }
+        .sidebar-nav li a{
+            color:#999999;
+            display:block;
+            text-decoration:none;
+        }
+        .sidebar-nav li a:hover{
+            color:#fff;
+            background: rgba(255,255,255,0.2);
+            text-decoration:none;
+        }
+        .sidebar-nav li a:active,
+        .sidebar-nac li a:focus{
+            text-decoration:none;
+        }
+        .sidebar-nav > .sidebar-brand{
+            height:45px;
+            line-height:60px;
+            font-size:18px;
+        }
+        .sidebar-nav > .sidebar-brand a{
+            color:#999999;
+        }
+        .sidebar-nav > .sidebar-brand a:hover{
+            color:#fff;
+            background:none;
+        }
+        #main_icon{
+            float:right;
+            padding-right:20px;
+            padding-top:20px;
+        }
+        .sub_icon{
+            float:right;
+            padding-right:65px;
+            padding-top:10px;
+        }
+        .content-header{
+            height:65px;
+            line-height:65px;
+        }
+        .content-header h1{
+            margin:0;
+            margin-left:20px;
+            line-height:65px;
+            display:inline-block;
+        }
+            @media(max-width:767px){
+                #wrapper{
+                    padding-left:70px;
+                    transition:all .4s ease 0s;
+                }
+                #sidebar-wrapper{
+                    left:50px;
+                }
+                #wrapper.active{
+                    padding-left:150px;
+                }
+                    #wrapper.active #sidebar-wrapper{
+                        left:150px;
+                        width:150px;
+                        transition:all .4s ease 0s;
+                    }
+            }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="wrapper">
+        <!--Menubar-->
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#cceeff">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+                <div class="containter-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" style="font-weight:bold; font-size:large; color:#36454f;">posWiN</a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <h4 style="color:#36454f; margin-right:70px;">
+                                    Welcome,
+                                    <asp:Label ID="lblAdminfname" runat="server" Text="Label" style="color:#36454f; font-weight:bold; font-size:large"></asp:Label>
+                                    <asp:Label ID="lblAdminlname" runat="server" Text="Label" style="color:#36454f; font-weight:bold; font-size:large"></asp:Label>
+                                    
+                                    <asp:LinkButton ID="lblLogout1" runat="server" style="text-decoration:none; margin:10px" OnClick="lblLogout1_Click">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    Logout
+                                    </asp:LinkButton>
+                                </h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </asp:ContentPlaceHolder>
+        </nav>
+        <!--Sidebar-->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" id="sidebar-menu">
+                <li class="sidebar-brand" style="text-align:center; color:#ffffff">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                </li>
+            </ul>
+            <ul class="sidebar-nav" id="sidebar">
+                <!--Add NavigateURL in hyperlink sidebar dashboard!!!--->
+                <li> 
+                    <asp:HyperLink ID="hlDashboard" runat="server">
+                        <span class="glyphicon glyphicon-cloud"></span>
+                        Dashboard
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlCustomers" runat="server">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Customers
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlEmployees" runat="server">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Employees
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlStocks" runat="server">
+                        <span class="glyphicon glyphicon-inbox"></span>
+                        Stocks
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlLocations" runat="server">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Locations
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlGiftCards" runat="server">
+                        <span class="glyphicon glyphicon-gift"></span>
+                        GiftCards
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlSales" runat="server">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        Sales
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlProfit" runat="server">
+                        <span class="glyphicon glyphicon-list"></span>
+                        Profit
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlReturnedItems" runat="server">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        Returned Items
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlExchangedItems" runat="server">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        Exchanged Items
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlAnnouncements" runat="server">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        Announcements
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlArchives" runat="server">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        Archives
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="hlEmployeeTimeRecord" runat="server">
+                        <span class="glyphicon glyphicon-time"></span>
+                        Employee's Time Record
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <asp:LinkButton ID="lbLogout2" runat="server" OnClick="lbLogout2_Click">
+                        <span class="glyphicon glyphicon-cog">
+                        </span>
+                        Logout
+                    </asp:LinkButton>
+                </li>
+            </ul>
+        </div>
+        <!--Content-->
+        <div id="page-content-wrapper">
+            <div class="page-content inset">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Menu toggle script-->
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggle("menuDisplayed");
+            })
+        </script>
+    </div>
+    </form>
+</body>
+</html>
